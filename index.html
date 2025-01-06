@@ -27,16 +27,6 @@
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
         }
 
-        /* 여우 커서 이모티콘 스타일 */
-        #fox-cursor {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            font-size: 30px; /* 여우 이모티콘 크기 */
-            transition: transform 0.1s ease;
-            user-select: none; /* 텍스트 선택 방지 */
-        }
-
         header {
             background: #eee;
             color: #333;
@@ -286,15 +276,7 @@
         <p>&copy; 2025 FoxyQwerty. All rights reserved.</p>
     </footer>
 
-    <div id="fox-cursor">🦊</div>
-
     <script>
-        // 여우 커서를 따라다니게 만드는 스크립트
-        document.addEventListener('mousemove', (e) => {
-            const foxCursor = document.getElementById('fox-cursor');
-            foxCursor.style.left = `${e.pageX - foxCursor.offsetWidth / 2}px`;
-            foxCursor.style.top = `${e.pageY - foxCursor.offsetHeight / 2}px`;
-        });
 
         function showSection(sectionId) {
             const sections = document.querySelectorAll('section');
