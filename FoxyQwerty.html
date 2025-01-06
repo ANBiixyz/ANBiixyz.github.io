@@ -1,12 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoxyQwerty3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans', sans-serif;
+            line-height: 1.6;
+            background-color: #eee; /* 밝은 배경 */
+            color: #333; /* 글씨 색은 어두운 색으로 유지 */
+            background-image: 
+                linear-gradient(to right, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+            background-size: 30px 30px; /* 격자 크기 */
+
+        header {
+            background: #eee;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+    margin: 0;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #6C94FF; /* 이 부분이 타이틀 글자 색을 설정하는 부분입니다 */
+}
+
+
+        nav {
+            background: #eee;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
+        }
+
+        nav a {
+            color: #444;
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+        }
+
+        nav a:hover {
+            background: #B9CCFF;
+            border-radius: 4px;
+        }
+
+        .profile-image {
+            display: none; /* 기본적으로 숨김 */
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .profile-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        section {
+            padding: 2rem;
+            background: #fff;
+            margin: 1rem auto;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: none; /* Initially hide all sections */
+        }
+
+        section.active {
+            display: block; /* Only the active section is visible */
+        }
+
+        .about h2, .gallery-section h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .gallery-section {
+            padding: 1rem 2rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            border-radius: 8px;
+        }
+
+        footer {
+            background: rgba(140, 155, 193, 0.2);
+            color: #fff;
+            text-align: center;
+            padding: 0.5rem 0;
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 <body>
-  <p>Hello, World!</p>
+    <header>
+        <h1 onclick="showSection('home')">FoxyQwerty3D</h1>
+    </header>
+    <nav>
+        <a href="#" onclick="showSection('home')">Home</a>
+        <a href="#" onclick="showSection('vtuber')">Vtuber</a>
+        <a href="#" onclick="showSection('커미션 신청')">커미션 신청</a>
+        <a href="#" onclick="showSection('커미션 가격')">커미션 가격</a>
+    </nav>
+    <!-- 프로필 이미지, 홈과 어바웃에서만 보이도록 설정 -->
+    <div class="profile-image" id="profileImage">
+        <img src="https://github.com/FoxyQwerty3D/FoxyQwerty3D.github.io/blob/main/my.png?raw=true" alt="Profile Picture">
+    </div>
+
+    <!-- 홈 섹션: 기본 화면 -->
+    <section id="home" class="about active">
+<div class="left">
+        <h2>폭시쿼티 @FoxyQwerty3D</h2>
+        <p><b>'3D 전공자의 섬세한 모델링과 텍스쳐링'</b><br>안녕하세요 3D 모델러 FoxyQwerty입니다.</p>
+        <p>2025년 상반기 의뢰를 받고 있습니다.<br>작업 과정과 커미션 단가는 커미션 페이지를 참고해 주세요.<br><br>아래는 제 포트폴리오입니다.<br><a href="https://www.artstation.com/FoxyQwerty3D" target="_blank">artstation.com/FoxyQwerty3D</a></p>
+        <p><b>[About Me]</b><br>3D 전공<br>PBR/NBR 기반 텍스쳐 기술<br>KR/CN/JP</p>
+        <p><b>[Tools]</b><br>Maya / 3Ds Max / ZBrush / Marvelous Designer<br>Photoshop / Substance 3D Painter / Mari / Ae / Pr / Unity
+        <p><b>[Contact]</b><br><b>Mail</b> coraline0120@gmail.com<br><b>Discord</b> FOXYQWERTY<br><b>Twitter (X)</b> <a href="x.com/FoxyQwerty3D" target="_blank">x.com/FoxyQwerty3D</a></p>
+    </section>
+
+    
+    <section id="vtuber" class="about">
+        <style>
+    .center {
+        text-align: center;
+    }
+</style>
+<div class="center">
+    <h2>Vtuber</h2>
+        <b>Artstation</b><br><a href="https://www.artstation.com/foxyqwerty3d" target="_blank">artstation.com/foxyqwerty3d</a>
+        <div class="gallery-section">
+        
+            <div class="gallery">
+                <img src="https://github.com/FoxyQwerty3D/FoxyQwerty3D.github.io/blob/main/Anbii.png?raw=true" alt="Work Image 1">
+                <img src="https://via.placeholder.com/300" alt="Work Image 2">
+                <img src="https://via.placeholder.com/300" alt="Work Image 3">
+                <img src="https://via.placeholder.com/300" alt="Work Image 4">
+                <img src="https://via.placeholder.com/300" alt="Work Image 5">
+                <img src="https://via.placeholder.com/300" alt="Work Image 6">
+            </div>
+</div>
+
+        </div>
+    </section>
+
+
+    <!-- 커미션 가격 섹션 -->
+    <section id="커미션 신청" class="about">
+<div class="left">
+        <p><b>[버츄얼/소품 모델링 커미션 및 외주]</b><br>- 슬롯제도입니다. (Closed)<br>- 의뢰 문의 및 궁금한 점이 있으면 연락 주세요.<br>- 1~3일 내로 회신드리겠습니다!<br>(coraline0120@gmail.com / 디스코드 FoxyQwerty)</p><br>
+        
+        <p><b>[작업 순서]</b><br><b>1차 컨펌</b> - 러프한 모델링 확인<br><b>2차 컨펌</b> - 모델링 최종 점검<br><b>3차 컨펌</b> - 리깅 및 페이셜 확인<br><b>최종 전달<br>(모든 제작 일정 3~4개월 소요)</b><br><br>
+
+        <p><b>[안내]</b><br>- FBX / Warudo / VRM<br>- 오리지널 모델링 (퍼리, R18 X)<br>- 아이폰 Face ID 기반<br>- 기본적으로 안 보이는 바디는 삭제 상태로 제작<br>- 화려한 장신구, 소품 추가, 바디 원형 유지 시 추가금</P><br>
+    
+        <p><b>[신청 양식]</b><br>- 캐릭터(신청자) 명<br>- 연락처<br><br>- 캐릭터 설정<br>- 캐릭터 삼면도<br>- 소품 디테일 이미지<br>- 정해진 의상이 없을 경우 비슷한 사진 자료 첨부<br>(자료는 디테일하면 할수록 더 좋습니다. 기타 자료 자유롭게 추가해 주세요!)</p>
+        <div class="gallery-section">
+            <div class="gallery">
+                <img src="https://via.placeholder.com/300" alt="Commission Image 1">
+                <img src="https://via.placeholder.com/300" alt="Commission Image 2">
+            </div>
+        </div>
+        <p><b>[주의사항]</b><br>- 모든 작업물의 저작권은 저(@FoxyQwerty3D)에게 있습니다.<br>- 작업물은 의뢰인의 활동 링크(유튜브,X 등)와 함께 웹페이지 및 SNS에 공개됩니다.<br>- 모델 공개전까지는 비공개 가능합니다. <br>- 특수 표정은 작업하지 않습니다.</p><br>
+        
+        <p><b>[환불 정책]</b><br>작업 전 (전액) / 모델링 (50%) / 리깅 전 (30%) / 리깅 후 (불가)</p>
+</div>
+    </section>
+    
+    <section id="커미션 가격" class="about">
+<div class="left">
+    <p><b>[오리지널 3D 버츄얼 모델]</b><br>- 첫 커미션 개시 할인 선착순 두 분 1,800,000₩입니다. 기본가격 3,000,000₩입니다.<br>- 견적에 따라 달라지므로, 편하게 연락 주세요! 정확한 비용을 안내해 드리겠습니다.<br>- 전체 가격의 절반을 선결제, 모델 수령 시 잔금 결제 방식으로 이루어집니다.</p><br>
+    <p><b>[작업 순서]</b><br><b>1차 컨펌</b> - 러프한 모델링 확인<br><b>2차 컨펌</b> - 모델링 최종 점검<br><b>3차 컨펌</b> - 리깅 및 페이셜 확인<br><b>최종 전달</b><br><br>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 FoxyQwerty3D. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // 모든 섹션 숨기기
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // 모든 섹션의 프로필 이미지 숨기기
+            document.getElementById('profileImage').style.display = 'none';
+
+            // 활성화할 섹션만 보여주기
+            const activeSection = document.getElementById(sectionId);
+            activeSection.classList.add('active');
+
+            // 홈과 어바웃 섹션에서는 프로필 이미지 보이기
+            if (sectionId === 'home' || sectionId === 'about') {
+                document.getElementById('profileImage').style.display = 'flex';
+            }
+        }
+
+        // 기본적으로 홈 섹션을 보여주기
+        showSection('home');
+    </script>
 </body>
 </html>
