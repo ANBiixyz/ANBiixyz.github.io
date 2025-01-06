@@ -10,12 +10,12 @@
             margin: 0;
             font-family: 'Noto Sans', sans-serif;
             line-height: 1.6;
-            background-color: #eee; /* 밝은 배경 */
-            color: #333; /* 기본 글씨 색 */
+            background-color: #eee;
+            color: #333;
             background-image: 
                 linear-gradient(to right, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
-            background-size: 30px 30px; /* 격자 크기 */
+            background-size: 30px 30px;
             transition: background-color 0.3s, color 0.3s;
         }
 
@@ -25,6 +25,16 @@
             background-image: 
                 linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+        }
+
+        /* 여우 커서 이모티콘 스타일 */
+        #fox-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 30px; /* 여우 이모티콘 크기 */
+            transition: transform 0.1s ease;
+            user-select: none; /* 텍스트 선택 방지 */
         }
 
         header {
@@ -42,7 +52,7 @@
 
         header h1 {
             margin: 0;
-            font-size: 2rem;
+            font-size: 1.8rem; /* 제목 크기 줄이기 */
             cursor: pointer;
             color: #8080ff;
         }
@@ -66,6 +76,7 @@
             margin: 0 1rem;
             padding: 0.5rem 1rem;
             transition: color 0.3s;
+            font-size: 1rem; /* 네비게이션 폰트 크기 줄이기 */
         }
 
         body.night-mode nav a {
@@ -78,7 +89,7 @@
         }
 
         section {
-            padding: 2rem;
+            padding: 1rem;
             background: #fff;
             margin: 1rem auto;
             max-width: 800px;
@@ -99,7 +110,7 @@
 
         .about h2, .gallery-section h2 {
             margin-top: 0;
-            font-size: 1.5rem;
+            font-size: 1.4rem; /* 소제목 크기 줄이기 */
         }
 
         .gallery-section {
@@ -108,12 +119,12 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 이미지 그리드 크기 줄이기 */
             gap: 1rem;
         }
 
         .gallery img {
-            width: 100%; /* 모바일에서도 이미지가 화면에 맞춰서 보이게 */
+            width: 100%;
             height: auto;
             object-fit: cover;
             border-radius: 8px;
@@ -129,12 +140,12 @@
 
         .night-mode-toggle {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             background-color: #8080ff;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 40px; /* 버튼 크기 줄이기 */
+            height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -143,7 +154,7 @@
         }
 
         .night-mode-toggle span {
-            font-size: 24px;
+            font-size: 20px; /* 아이콘 크기 줄이기 */
             color: #fff;
         }
 
@@ -151,29 +162,34 @@
             background-color: #6a6aff;
         }
 
-        /* 모바일 환경에 맞춰 반응형 스타일 추가 */
+        /* 모바일 환경에서 크기 조정 */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 1.5rem; /* 모바일에서 제목 폰트 크기 조정 */
+                font-size: 1.4rem; /* 제목 크기 더 줄이기 */
             }
 
             nav a {
-                font-size: 1rem; /* 내비게이션 메뉴 폰트 크기 조정 */
+                font-size: 0.9rem; /* 네비게이션 폰트 크기 더 줄이기 */
             }
 
             section {
-                padding: 1.5rem; /* 섹션 패딩을 줄여서 화면 공간을 효율적으로 사용 */
+                padding: 1rem;
                 margin: 0.5rem;
-                width: 95%; /* 섹션의 너비를 95%로 설정 */
+                width: 90%; /* 섹션 크기 줄이기 */
             }
 
             .gallery {
-                grid-template-columns: 1fr 1fr; /* 모바일에서는 2개의 열로 갤러리 정렬 */
+                grid-template-columns: 1fr 1fr; /* 이미지 그리드 2개로 조정 */
             }
 
             .gallery img {
-                width: 100%; /* 모바일에서 이미지가 전체 폭을 차지하도록 설정 */
+                width: 100%;
                 height: auto;
+            }
+
+            .night-mode-toggle {
+                width: 35px; /* 버튼 크기 더 줄이기 */
+                height: 35px;
             }
         }
 
@@ -183,16 +199,16 @@
             }
 
             nav a {
-                margin: 0.5rem 0; /* 작은 화면에서는 네비게이션 아이템들을 세로로 나열 */
+                margin: 0.5rem 0;
                 padding: 0.5rem;
-                font-size: 0.9rem; /* 작은 화면에서는 글자 크기를 더 작게 */
+                font-size: 0.85rem; /* 네비게이션 폰트 크기 더 줄이기 */
             }
 
             .night-mode-toggle {
                 bottom: 10px;
                 right: 10px;
-                width: 40px;
-                height: 40px; /* 작은 화면에서는 버튼 크기를 조정 */
+                width: 30px; /* 버튼 크기 더 줄이기 */
+                height: 30px;
             }
         }
     </style>
@@ -236,7 +252,6 @@
         </div>
     </section>
 
-
     <section id="커미션 신청" class="about">
         <div class="center">
         <p><b>[오리지널 3D 버츄얼 커미션]</b><br>- 의뢰는 한 번에 두 분씩 받습니다. (▣ □) / (▣: 진행 중 | □: 남은 자리)<br>- 문의사항은 언제든 연락 주세요. 1~3일 내 답변드립니다!<br><br>
@@ -257,7 +272,6 @@
         <p><b>[환불 정책]</b><br>작업 전 (전액) / 모델링 (50%) / 리깅 전 (30%) / 리깅 후 (불가)</p>
 </div>
     </section>
-
     <section id="커미션 가격" class="about">
         <div class="center">
     <p><b>[오리지널 3D 버츄얼 모델]</b><br>- 첫 커미션 개시 할인 선착순 두 분 추가금 없이 1,800,000₩입니다.<br>- 기본가격 3,000,000₩입니다.<br>- 견적에 따라 달라집니다. 정확한 비용은 문의주세요.<br>- 전체 가격의 절반을 선결제, 모델 수령 시 잔금 결제 방식으로 이루어집니다.</p><br>
@@ -272,7 +286,16 @@
         <p>&copy; 2025 FoxyQwerty. All rights reserved.</p>
     </footer>
 
+    <div id="fox-cursor">🦊</div>
+
     <script>
+        // 여우 커서를 따라다니게 만드는 스크립트
+        document.addEventListener('mousemove', (e) => {
+            const foxCursor = document.getElementById('fox-cursor');
+            foxCursor.style.left = `${e.pageX - foxCursor.offsetWidth / 2}px`;
+            foxCursor.style.top = `${e.pageY - foxCursor.offsetHeight / 2}px`;
+        });
+
         function showSection(sectionId) {
             const sections = document.querySelectorAll('section');
             sections.forEach(section => section.classList.remove('active'));
