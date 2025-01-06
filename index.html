@@ -28,7 +28,7 @@
         }
 
         header {
-            background: #eee; /* 낮 모드에서의 배경 색상 */
+            background: #eee;
             color: #333;
             padding: 1rem 0;
             text-align: center;
@@ -36,16 +36,15 @@
         }
 
         body.night-mode header {
-            background: #444; /* 다크 모드에서의 배경 색상 */
+            background: #444;
             color: #eee;
         }
 
-        /* FOXYQWERTY 타이틀 색상 고정 */
         header h1 {
             margin: 0;
             font-size: 2rem;
             cursor: pointer;
-            color: #8080ff; /* 타이틀 색상은 나이트모드에서도 변하지 않음 */
+            color: #8080ff;
         }
 
         nav {
@@ -58,7 +57,7 @@
         }
 
         body.night-mode nav {
-            background: #444; /* 나이트모드에서 내비게이션 배경 색상 반전 */
+            background: #444;
         }
 
         nav a {
@@ -70,25 +69,12 @@
         }
 
         body.night-mode nav a {
-            color: #fff; /* 나이트모드에서 네비게이션 글씨 색상 반전 */
+            color: #fff;
         }
 
         nav a:hover {
             background: #B9CCFF;
             border-radius: 4px;
-        }
-
-        .profile-image {
-            display: none; /* 기본적으로 숨김 */
-            justify-content: center;
-            margin: 1rem 0;
-        }
-
-        .profile-image img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
         }
 
         section {
@@ -98,16 +84,16 @@
             max-width: 800px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            display: none; /* Initially hide all sections */
+            display: none;
             transition: background-color 0.3s, color 0.3s;
         }
 
         section.active {
-            display: block; /* Only the active section is visible */
+            display: block;
         }
 
         body.night-mode section {
-            background: #444; /* 나이트모드에서 카드 배경 색상 반전 */
+            background: #444;
             color: #eee;
         }
 
@@ -127,10 +113,9 @@
         }
 
         .gallery img {
-            width: 300px;
-            height: 300px;
+            width: 100%; /* 모바일에서도 이미지가 화면에 맞춰서 보이게 */
+            height: auto;
             object-fit: cover;
-            display: block;
             border-radius: 8px;
         }
 
@@ -142,7 +127,6 @@
             margin-top: 2rem;
         }
 
-        /* 나이트모드 토글 버튼 */
         .night-mode-toggle {
             position: fixed;
             bottom: 20px;
@@ -166,6 +150,51 @@
         .night-mode-toggle:hover {
             background-color: #6a6aff;
         }
+
+        /* 모바일 환경에 맞춰 반응형 스타일 추가 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem; /* 모바일에서 제목 폰트 크기 조정 */
+            }
+
+            nav a {
+                font-size: 1rem; /* 내비게이션 메뉴 폰트 크기 조정 */
+            }
+
+            section {
+                padding: 1.5rem; /* 섹션 패딩을 줄여서 화면 공간을 효율적으로 사용 */
+                margin: 0.5rem;
+                width: 95%; /* 섹션의 너비를 95%로 설정 */
+            }
+
+            .gallery {
+                grid-template-columns: 1fr 1fr; /* 모바일에서는 2개의 열로 갤러리 정렬 */
+            }
+
+            .gallery img {
+                width: 100%; /* 모바일에서 이미지가 전체 폭을 차지하도록 설정 */
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 0.5rem 0; /* 작은 화면에서는 네비게이션 아이템들을 세로로 나열 */
+                padding: 0.5rem;
+                font-size: 0.9rem; /* 작은 화면에서는 글자 크기를 더 작게 */
+            }
+
+            .night-mode-toggle {
+                bottom: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px; /* 작은 화면에서는 버튼 크기를 조정 */
+            }
+        }
     </style>
 </head>
 <body>
@@ -179,7 +208,6 @@
         <a href="#" onclick="showSection('커미션 가격')">커미션 가격</a>
     </nav>
 
-    <!-- 홈 섹션: 기본 화면 -->
     <section id="home" class="about active">
         <div class="left">
             <h2>폭시쿼티 @FoxyQwerty3D</h2>
@@ -191,7 +219,6 @@
         </div>
     </section>
 
-    <!-- 포트폴리오 섹션 -->
     <section id="포트폴리오" class="about">
         <div class="center">
             <h2>Vtuber</h2>
@@ -209,7 +236,9 @@
         </div>
     </section>
 
+
     <section id="커미션 신청" class="about">
+        <div class="center">
         <p><b>[오리지널 3D 버츄얼 커미션]</b><br>- 의뢰는 한 번에 두 분씩 받습니다. (▣ □) / (▣: 진행 중 | □: 남은 자리)<br>- 문의사항은 언제든 연락 주세요. 1~3일 내 답변드립니다!<br><br>
 
         <p><b>[안내]</b><br>- FBX / Warudo / VRM<br>- 오리지널 모델링 (퍼리, R18 X)<br>- 아이폰 Face ID 기반<br>- 기본적으로 안 보이는 바디는 삭제 상태로 제작<br>- 화려한 장신구, 소품 추가, 바디 원형 유지 시 추가금</P><br>
@@ -230,39 +259,35 @@
     </section>
 
     <section id="커미션 가격" class="about">
+        <div class="center">
     <p><b>[오리지널 3D 버츄얼 모델]</b><br>- 첫 커미션 개시 할인 선착순 두 분 추가금 없이 1,800,000₩입니다.<br>- 기본가격 3,000,000₩입니다.<br>- 견적에 따라 달라집니다. 정확한 비용은 문의주세요.<br>- 전체 가격의 절반을 선결제, 모델 수령 시 잔금 결제 방식으로 이루어집니다.</p><br>
     <p><b>[노래 커버가 있으면 할인됩니다]</b><br>- 호피폴라(Hoppipolla) - 너의 바다(Your Ocean)<br>- 하현상의 노래</p>
     </section>
-
-    <footer>
-        <p>&copy; 2025 FoxyQwerty | All Rights Reserved</p>
-    </footer>
 
     <div class="night-mode-toggle" onclick="toggleNightMode()">
         <span id="night-mode-icon">🌙</span>
     </div>
 
+    <footer>
+        <p>&copy; 2025 FoxyQwerty. All rights reserved.</p>
+    </footer>
+
     <script>
-        function showSection(id) {
+        function showSection(sectionId) {
             const sections = document.querySelectorAll('section');
             sections.forEach(section => section.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-
-            // Show profile image only on the home section
-            const profileImage = document.getElementById('profileImage');
-            if (id === 'home') {
-                profileImage.style.display = 'block';
-            } else {
-                profileImage.style.display = 'none';
-            }
+            document.getElementById(sectionId).classList.add('active');
         }
 
-        let isNightMode = false;
         function toggleNightMode() {
-            isNightMode = !isNightMode;
-            document.body.classList.toggle('night-mode', isNightMode);
+            const body = document.body;
             const icon = document.getElementById('night-mode-icon');
-            icon.textContent = isNightMode ? '🌞' : '🌙'; // 달과 해 이모티콘 변경
+            body.classList.toggle('night-mode');
+            if (body.classList.contains('night-mode')) {
+                icon.textContent = '🌞';
+            } else {
+                icon.textContent = '🌙';
+            }
         }
     </script>
 </body>
