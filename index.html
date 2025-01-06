@@ -11,26 +11,42 @@
             font-family: 'Noto Sans', sans-serif;
             line-height: 1.6;
             background-color: #eee; /* 밝은 배경 */
-            color: #333; /* 글씨 색은 어두운 색으로 유지 */
+            color: #333; /* 기본 글씨 색 */
             background-image: 
                 linear-gradient(to right, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
             background-size: 30px 30px; /* 격자 크기 */
-
-        header {
-            background: #eee;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        header h1 {
-    margin: 0;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #6C94FF; /* 이 부분이 타이틀 글자 색을 설정하는 부분입니다 */
-}
+        body.night-mode {
+            background-color: #333;
+            color: #eee;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+        }
 
+        header {
+            background: #eee; /* 낮 모드에서의 배경 색상 */
+            color: #333;
+            padding: 1rem 0;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.night-mode header {
+            background: #444; /* 다크 모드에서의 배경 색상 */
+            color: #eee;
+        }
+
+        /* FOXYQWERTY 타이틀 색상 고정 */
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #8080ff; /* 타이틀 색상은 나이트모드에서도 변하지 않음 */
+        }
 
         nav {
             background: #eee;
@@ -38,6 +54,11 @@
             display: flex;
             justify-content: center;
             padding: 0.5rem 0;
+            transition: background-color 0.3s;
+        }
+
+        body.night-mode nav {
+            background: #444; /* 나이트모드에서 내비게이션 배경 색상 반전 */
         }
 
         nav a {
@@ -45,6 +66,11 @@
             text-decoration: none;
             margin: 0 1rem;
             padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+
+        body.night-mode nav a {
+            color: #fff; /* 나이트모드에서 네비게이션 글씨 색상 반전 */
         }
 
         nav a:hover {
@@ -73,10 +99,16 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             display: none; /* Initially hide all sections */
+            transition: background-color 0.3s, color 0.3s;
         }
 
         section.active {
             display: block; /* Only the active section is visible */
+        }
+
+        body.night-mode section {
+            background: #444; /* 나이트모드에서 카드 배경 색상 반전 */
+            color: #eee;
         }
 
         .about h2, .gallery-section h2 {
@@ -109,6 +141,31 @@
             padding: 0.5rem 0;
             margin-top: 2rem;
         }
+
+        /* 나이트모드 토글 버튼 */
+        .night-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #8080ff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .night-mode-toggle span {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .night-mode-toggle:hover {
+            background-color: #6a6aff;
+        }
     </style>
 </head>
 <body>
@@ -121,51 +178,38 @@
         <a href="#" onclick="showSection('커미션 신청')">커미션 신청</a>
         <a href="#" onclick="showSection('커미션 가격')">커미션 가격</a>
     </nav>
-    <!-- 프로필 이미지, 홈과 어바웃에서만 보이도록 설정 -->
-    <div class="profile-image" id="profileImage">
-        <img src="https://github.com/FoxyQwerty3D/FoxyQwerty3D.github.io/blob/main/my.png?raw=true" alt="Profile Picture">
-    </div>
 
     <!-- 홈 섹션: 기본 화면 -->
     <section id="home" class="about active">
-<div class="left">
-        <h2>폭시쿼티 @FoxyQwerty3D</h2>
-        <p><b>[3D 전공자의 섬세한 모델링과 텍스쳐링]</b><br>안녕하세요 3D 모델러 FoxyQwerty입니다.</p>
-        <p>2025년 상반기 의뢰를 받고 있습니다.<br>작업 과정과 커미션 단가는 커미션 페이지를 참고해 주세요.<br></p>
-        <p><b>[About Me]</b><br>KR/CN/JP<br>3D 전공<br>PBR/NBR 텍스쳐 기술</p>
-        <p><b>[Tools]</b><br>Maya / 3Ds Max / ZBrush / Marvelous Designer<br>Photoshop / Substance 3D Painter / Mari / Ae / Pr / Unity
-        <p><b>[Contact]</b><br><b>Mail</b> coraline0120@gmail.com<br><b>Discord</b> FoxyQwerty<br><b>Twitter (X)</b> <a href="x.com/FoxyQwertyX" target="_blank">x.com/FoxyQwertyX</a></p>
-    </section>
-
-    
-    <section id="포트폴리오" class="about">
-        <style>
-    .center {
-        text-align: center;
-    }
-</style>
-<div class="center">
-    <h2>Vtuber</h2>
-        <b>Artstation</b><br><a href="https://www.artstation.com/foxyqwerty" target="_blank">artstation.com/foxyqwerty</a>
-        <div class="gallery-section">
-        
-            <div class="gallery">
-                <img src="https://via.placeholder.com/300" alt="Work Image 1">
-                <img src="https://via.placeholder.com/300" alt="Work Image 2">
-                <img src="https://via.placeholder.com/300" alt="Work Image 3">
-                <img src="https://via.placeholder.com/300" alt="Work Image 4">
-                <img src="https://via.placeholder.com/300" alt="Work Image 5">
-                <img src="https://via.placeholder.com/300" alt="Work Image 6">
-            </div>
-</div>
-
+        <div class="left">
+            <h2>폭시쿼티 @FoxyQwerty3D</h2>
+            <p><b>[3D 전공자의 섬세한 모델링과 텍스쳐링]</b><br>안녕하세요 3D 모델러 FoxyQwerty입니다.</p>
+            <p>2025년 상반기 의뢰를 받고 있습니다.<br>작업 과정과 커미션 단가는 커미션 페이지를 참고해 주세요.<br></p>
+            <p><b>[About Me]</b><br>KR/CN/JP<br>3D 전공<br>PBR/NBR 텍스쳐 기술</p>
+            <p><b>[Tools]</b><br>Maya / 3Ds Max / ZBrush / Marvelous Designer<br>Photoshop / Substance 3D Painter / Mari / Ae / Pr / Unity</p>
+            <p><b>[Contact]</b><br><b>Mail</b> coraline0120@gmail.com<br><b>Discord</b> FoxyQwerty<br><b>Twitter (X)</b> <a href="x.com/FoxyQwertyX" target="_blank">x.com/FoxyQwertyX</a></p>
         </div>
     </section>
 
+    <!-- 포트폴리오 섹션 -->
+    <section id="포트폴리오" class="about">
+        <div class="center">
+            <h2>Vtuber</h2>
+            <b>Artstation</b><br><a href="https://www.artstation.com/foxyqwerty" target="_blank">artstation.com/foxyqwerty</a>
+            <div class="gallery-section">
+                <div class="gallery">
+                    <img src="https://via.placeholder.com/300" alt="Work Image 1">
+                    <img src="https://via.placeholder.com/300" alt="Work Image 2">
+                    <img src="https://via.placeholder.com/300" alt="Work Image 3">
+                    <img src="https://via.placeholder.com/300" alt="Work Image 4">
+                    <img src="https://via.placeholder.com/300" alt="Work Image 5">
+                    <img src="https://via.placeholder.com/300" alt="Work Image 6">
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- 커미션 가격 섹션 -->
     <section id="커미션 신청" class="about">
-<div class="left">
         <p><b>[오리지널 3D 버츄얼 커미션]</b><br>- 의뢰는 한 번에 두 분씩 받습니다. (▣ □) / (▣: 진행 중 | □: 남은 자리)<br>- 문의사항은 언제든 연락 주세요. 1~3일 내 답변드립니다!<br><br>
 
         <p><b>[안내]</b><br>- FBX / Warudo / VRM<br>- 오리지널 모델링 (퍼리, R18 X)<br>- 아이폰 Face ID 기반<br>- 기본적으로 안 보이는 바디는 삭제 상태로 제작<br>- 화려한 장신구, 소품 추가, 바디 원형 유지 시 추가금</P><br>
@@ -184,41 +228,42 @@
         <p><b>[환불 정책]</b><br>작업 전 (전액) / 모델링 (50%) / 리깅 전 (30%) / 리깅 후 (불가)</p>
 </div>
     </section>
-    
+
     <section id="커미션 가격" class="about">
-<div class="left">
     <p><b>[오리지널 3D 버츄얼 모델]</b><br>- 첫 커미션 개시 할인 선착순 두 분 추가금 없이 1,800,000₩입니다.<br>- 기본가격 3,000,000₩입니다.<br>- 견적에 따라 달라집니다. 정확한 비용은 문의주세요.<br>- 전체 가격의 절반을 선결제, 모델 수령 시 잔금 결제 방식으로 이루어집니다.</p><br>
     <p><b>[노래 커버가 있으면 할인됩니다]</b><br>- 호피폴라(Hoppipolla) - 너의 바다(Your Ocean)<br>- 하현상의 노래</p>
     </section>
 
-
     <footer>
-        <p>&copy; 2025 FoxyQwerty3D. All rights reserved.</p>
+        <p>&copy; 2025 FoxyQwerty | All Rights Reserved</p>
     </footer>
 
+    <div class="night-mode-toggle" onclick="toggleNightMode()">
+        <span id="night-mode-icon">🌙</span>
+    </div>
+
     <script>
-        function showSection(sectionId) {
-            // 모든 섹션 숨기기
+        function showSection(id) {
             const sections = document.querySelectorAll('section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
 
-            // 모든 섹션의 프로필 이미지 숨기기
-            document.getElementById('profileImage').style.display = 'none';
-
-            // 활성화할 섹션만 보여주기
-            const activeSection = document.getElementById(sectionId);
-            activeSection.classList.add('active');
-
-            // 홈과 어바웃 섹션에서는 프로필 이미지 보이기
-            if (sectionId === 'home' || sectionId === 'about') {
-                document.getElementById('profileImage').style.display = 'flex';
+            // Show profile image only on the home section
+            const profileImage = document.getElementById('profileImage');
+            if (id === 'home') {
+                profileImage.style.display = 'block';
+            } else {
+                profileImage.style.display = 'none';
             }
         }
 
-        // 기본적으로 홈 섹션을 보여주기
-        showSection('home');
+        let isNightMode = false;
+        function toggleNightMode() {
+            isNightMode = !isNightMode;
+            document.body.classList.toggle('night-mode', isNightMode);
+            const icon = document.getElementById('night-mode-icon');
+            icon.textContent = isNightMode ? '🌞' : '🌙'; // 달과 해 이모티콘 변경
+        }
     </script>
 </body>
 </html>
