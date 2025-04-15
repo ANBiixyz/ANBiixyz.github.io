@@ -1,303 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FoxyQwerty</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Noto Sans', sans-serif;
-            line-height: 1.6;
-            background-color: #eee;
-            color: #333;
-            background-image: 
-                linear-gradient(to right, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
-            background-size: 30px 30px;
-            transition: background-color 0.3s, color 0.3s;
-        }
+  <meta charset="UTF-8">
+  <title>ANBii</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: monospace;
+      font-size: 16px;
+      margin: 0;
+      padding: 20px;
+      white-space: pre;
+      text-shadow: 0 0 5px #0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
 
-        body.night-mode {
-            background-color: #333;
-            color: #eee;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
-        }
+    .main-content {
+      width: 100%;
+      max-width: 800px;
+      align-self: flex-start;
+    }
 
-        header {
-            background: #eee;
-            color: #333;
-            padding: 1rem 0;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    .ascii-art {
+      text-align: right;
+      white-space: pre;
+      font-size: 14px;
+      line-height: 1.1;
+      margin-top: 2em;
+    }
 
-        body.night-mode header {
-            background: #444;
-            color: #eee;
-        }
+    a {
+      color: #0f0;
+      text-decoration: underline;
+    }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.8rem; /* 제목 크기 줄이기 */
-            cursor: pointer;
-            color: #8080ff;
-        }
+    a:hover {
+      color: #f00;
+      background-color: #0f0;
+    }
 
-        nav {
-            background: #eee;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            padding: 0.5rem 0;
-            transition: background-color 0.3s;
-        }
+    .link-row {
+      display: flex;
+      gap: 2em;
+      margin-top: 0.5em;
+    }
 
-        body.night-mode nav {
-            background: #444;
-        }
+    .label {
+      width: 100px;
+    }
 
-        nav a {
-            color: #444;
-            text-decoration: none;
-            margin: 0 1rem;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s;
-            font-size: 1rem; /* 네비게이션 폰트 크기 줄이기 */
-        }
+    .spacer {
+      margin-top: 2em;
+    }
 
-        body.night-mode nav a {
-            color: #fff;
-        }
+    .redacted {
+      background-color: #0f0;
+      color: #000;
+      padding: 0 4px;
+      font-weight: bold;
+    }
 
-        nav a:hover {
-            background: #B9CCFF;
-            border-radius: 4px;
-        }
+    .terminal-glow {
+      animation: flicker 1.2s infinite;
+    }
 
-        section {
-            padding: 1rem;
-            background: #fff;
-            margin: 1rem auto;
-            max-width: 800px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            display: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
 
-        section.active {
-            display: block;
-        }
-
-        body.night-mode section {
-            background: #444;
-            color: #eee;
-        }
-
-        .about h2, .gallery-section h2 {
-            margin-top: 0;
-            font-size: 1.4rem; /* 소제목 크기 줄이기 */
-        }
-
-        .gallery-section {
-            padding: 1rem 2rem;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 이미지 그리드 크기 줄이기 */
-            gap: 1rem;
-        }
-
-        .gallery img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        footer {
-            background: rgba(140, 155, 193, 0.2);
-            color: #fff;
-            text-align: center;
-            padding: 0.5rem 0;
-            margin-top: 2rem;
-        }
-
-        .night-mode-toggle {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            background-color: #8080ff;
-            border-radius: 50%;
-            width: 40px; /* 버튼 크기 줄이기 */
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .night-mode-toggle span {
-            font-size: 20px; /* 아이콘 크기 줄이기 */
-            color: #fff;
-        }
-
-        .night-mode-toggle:hover {
-            background-color: #6a6aff;
-        }
-
-        /* 모바일 환경에서 크기 조정 */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.4rem; /* 제목 크기 더 줄이기 */
-            }
-
-            nav a {
-                font-size: 0.9rem; /* 네비게이션 폰트 크기 더 줄이기 */
-            }
-
-            section {
-                padding: 1rem;
-                margin: 0.5rem;
-                width: 90%; /* 섹션 크기 줄이기 */
-            }
-
-            .gallery {
-                grid-template-columns: 1fr 1fr; /* 이미지 그리드 2개로 조정 */
-            }
-
-            .gallery img {
-                width: 100%;
-                height: auto;
-            }
-
-            .night-mode-toggle {
-                width: 35px; /* 버튼 크기 더 줄이기 */
-                height: 35px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav {
-                flex-direction: column;
-            }
-
-            nav a {
-                margin: 0.5rem 0;
-                padding: 0.5rem;
-                font-size: 0.85rem; /* 네비게이션 폰트 크기 더 줄이기 */
-            }
-
-            .night-mode-toggle {
-                bottom: 10px;
-                right: 10px;
-                width: 30px; /* 버튼 크기 더 줄이기 */
-                height: 30px;
-            }
-        }
-    </style>
+    small {
+      display: block;
+      margin-top: 2em;
+      color: #0f0;
+      opacity: 0.7;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1 onclick="showSection('home')">FoxyQwerty</h1>
-    </header>
-    <nav>
-        <a href="#" onclick="showSection('home')">Home</a>
-        <a href="#" onclick="showSection('포트폴리오')">포트폴리오</a>
-        <a href="#" onclick="showSection('커미션 안내')">커미션 안내</a>
-        <a href="#" onclick="showSection('신청 및 가격')">신청 및 가격</a>
-    </nav>
+<div class="main-content">
+<span class="terminal-glow">航行中...</span>
 
-    <section id="home" class="about active">
-        <div class="left">
-            <h2>폭시쿼티 @FoxyQwerty3D</h2>
-            <p><b>[3D 전공자의 섬세한 모델링과 텍스쳐링]</b><br>안녕하세요 3D 모델러 FoxyQwerty입니다.</p>
-            <p>2025년 상반기 의뢰를 받고 있습니다.<br>작업 과정과 커미션 단가는 커미션 페이지를 참고해 주세요.<br></p>
-            <p><b>[About Me]</b><br>KR/CN/JP<br>3D 전공<br>PBR/NBR 텍스쳐 기술</p>
-            <p><b>[Tools]</b><br>Maya / 3Ds Max / ZBrush / Marvelous Designer<br>Photoshop / Substance 3D Painter / Mari / Ae / Pr / Unity</p>
-            <p><b>[Contact]</b><br><b>Mail</b> coraline0120@gmail.com<br><b>Discord</b> FoxyQwerty<br><b>Twitter (X)</b> <a href="https://x.com/FoxyQwerty3D" target="_blank">x.com/FoxyQwerty3D</a></p>
-        </div>
-    </section>
+<div class="spacer"></div>
+ANBii <span class="redacted">(安斐)</span>
+<br>
+Contact: <span class="redacted">coraline0120@gmail.com</span>
 
-    <section id="포트폴리오" class="about">
-        <div class="center">
-            <h2>Vtuber</h2>
-            <b>Artstation</b><br><a href="https://www.artstation.com/foxyqwerty" target="_blank">artstation.com/foxyqwerty</a>
-            <div class="gallery-section">
-                <div class="gallery">
-                    <img src="https://via.placeholder.com/300" alt="Work Image 1">
-                    <img src="https://via.placeholder.com/300" alt="Work Image 2">
-                    <img src="https://via.placeholder.com/300" alt="Work Image 3">
-                    <img src="https://via.placeholder.com/300" alt="Work Image 4">
-                    <img src="https://via.placeholder.com/300" alt="Work Image 5">
-                    <img src="https://via.placeholder.com/300" alt="Work Image 6">
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="spacer"></div>
 
-    <section id="커미션 안내" class="about">
-        <div class="center">
-            
-        <h2>커미션 안내</h2>
-        <p>- 한 번에 두 분씩 받습니다. (▣ □) / (▣: 진행 중 | □: 남은 자리)<br>- 문의사항은 언제든 연락 주세요. 1~3일 내 답변드립니다!<br><br>
-
-        <p><b>[안내]</b><br>- FBX / Warudo / VRM<br>- 오리지널 모델링 (퍼리, R18 X)<br>- 아이폰 Face ID 기반<br>- 기본적으로 안 보이는 바디는 삭제 상태로 제작<br>- 화려한 장신구, 소품 추가, 바디 원형 유지 시 추가금</P><br>
-        <div class="gallery-section">
-            <div class="gallery">
-                <img src="https://via.placeholder.com/300" alt="Commission Image 1">
-                <img src="https://via.placeholder.com/300" alt="Commission Image 2">
-            </div>
-        </div>
-        <p><b><br>[주의사항]</b><br>- 모든 작업물의 저작권은 저(FoxyQwerty)에게 있습니다.<br>- 제3자에게 작업물 공유 및 판매를 금지합니다.<br>- 기본적으로 52가지 페이셜이 들어갑니다.<br>- 작업물은 의뢰인의 활동 링크(유튜브, X 등)와 함께 웹페이지 및 SNS에 공개됩니다.<br>- 모델 공개전까지는 비공개 가능합니다.</p><br>
-        
-        <p><b>[환불 정책]</b><br>작업 전 (전액) / 모델링 (50%) / 리깅 전 (30%) / 리깅 후 (불가)</p>
+<div class="link-row">
+  <span class="label">Twitter</span>
+  <a href="https://x.com/anbiixyz" target="_blank">https://x.com/anbiixyz</a>
 </div>
-    </section>
-    <section id="신청 및 가격" class="about">
-        <div class="center">
-            
-        <h2>신청 및 가격</h2>
-    
-        <p><b>[양식]</b><br>- 캐릭터(신청자) 명<br>- 연락처<br>- 캐릭터 설정<br>- 캐릭터 삼면도<br>- 소품 디테일 이미지<br>- 정해진 의상이 없을 경우 비슷한 사진 자료 첨부<br>(자료는 디테일하면 할수록 더 좋습니다. 기타 자료 자유롭게 추가해 주세요)</p><br>
-        
-        <p><b>[컨펌]</b><br><b>1차</b> - 러프한 모델링 확인<br><b>2차</b> - 모델링 최종 점검<br><b>3차</b> - 리깅 및 페이셜 확인<br><b>최종 전달</b><br><br>이외 중간중간 제작 현황 전달해드립니다.<br><b>(모든 제작 일정 2~3개월 소요)</b><br><br>
-            <p><b>[가격]</b><br>- 첫 커미션 개시 할인 선착순 두 분 추가금 없이 1,800,000₩입니다.<br>- 기본가격 3,000,000₩입니다.<br>- 견적에 따라 달라집니다. 정확한 비용은 문의주세요.<br>- 전체 가격의 절반을 선결제, 모델 수령 시 잔금 결제 방식으로 이루어집니다.</p><br>
-    <p><b>[노래 커버가 있으면 할인됩니다]</b><br>- 호피폴라(Hoppipolla) - 너의 바다(Your Ocean)<br>- 하현상의 노래<br>- 만찬가</p>
-    </section>
 
-    <div class="night-mode-toggle" onclick="toggleNightMode()">
-        <span id="night-mode-icon">🌙</span>
-    </div>
+<div class="link-row">
+  <span class="label">YouTube</span>
+  <a href="https://www.youtube.com/@anbiixyz" target="_blank">https://www.youtube.com/@anbiixyz</a>
+</div>
 
-    <footer>
-        <p>&copy; 2025 FoxyQwerty. All rights reserved.</p>
-    </footer>
+<div class="link-row">
+  <span class="label">ArtStation</span>
+  <a href="https://www.artstation.com/anbiixyz" target="_blank">https://www.artstation.com/anbiixyz</a>
+</div>
 
-    <script>
+<div class="link-row">
+  <span class="label">ArtMug</span>
+  <a href="https://artmug.kr/index.php?channel=view&uid=49138" target="_blank">https://artmug.kr/index.php?channel=view&uid=49138</a>
+</div>
 
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => section.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-        }
+<small>last update: 2025 — trace log scrubbed</small>
+</div>
 
-        function toggleNightMode() {
-            const body = document.body;
-            const icon = document.getElementById('night-mode-icon');
-            body.classList.toggle('night-mode');
-            if (body.classList.contains('night-mode')) {
-                icon.textContent = '🌞';
-            } else {
-                icon.textContent = '🌙';
-            }
-        }
-    </script>
+<div class="ascii-art" style="color: #FF1493; position: absolute; top: 10px; right: 20px; text-align: right; white-space: pre; font-size: 14px; line-height: 1.1;">
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⡷⡀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠤⠺⣟⡽⠀⠀⠀⠀⠀⠀⠀⠈⠑⠂⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⠊⠁⠀⠀⠙⠁⠀⠀⠀⠀⠀⠀⡄⠀⠀⠀⠀⠈⠳⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢠⠎⠀⠀⠆⠀⢰⡃⠀⠐⡄⠀⢲⠀⠃⢻⠀⠀⠀⡄⠀⠀⠈⠱⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠸⣶⣄⣺⢇⡄⠀⡇⠀⢰⢺⠱⣄⠀⠘⢆⠈⡆⠀⠸⠀⠀⠀⡇⠀⠀⠀⠰⠘⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠙⢿⡏⢸⠀⠀⡇⠀⢸⣾⢀⣨⣷⡄⠈⢣⣇⠀⠀⡆⠀⠀⡇⠀⠀⠀⠀⠀⠸⡄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⠃⢸⡄⢸⡇⡀⢸⢿⡏⠀⣀⣹⣦⡀⢿⠀⠀⡇⠀⠀⡇⠀⠀⠀⠀⠀⠀⢣⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣼⡄⠈⡇⠈⣿⣿⣼⣞⣷⠾⣿⣿⡿⠉⢻⠀⠀⡇⠀⠀⡿⠟⢷⡄⠀⠀⠀⡘⡄⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⡇⣇⢸⢿⡀⠇⠻⠉⠸⠏⣠⠟⠉⠀⠀⠀⡄⠀⠿⠀⠀⣿⡀⠀⡇⠀⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣿⣿⣾⣷⣧⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⢀⡿⢃⣼⠁⠀⠀⠃⠀⢸⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢻⡻⢯⣻⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⠀⠀⠀⢸⡧⡎⢸⠃⠀⠀⢠⢀⣸⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⡇⢸⠉⠧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⢸⡇⡇⢸⠀⠀⠀⢸⡈⣿⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⠃⢸⡀⠀⠀⠀⢀⡠⠴⠚⠀⠀⠀⠀⠀⢸⠀⠀⠀⢸⡇⢸⢸⡀⠀⠀⠈⡇⢻⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠘⡆⠀⢇⠀⠀⠰⠋⠀⠀⠀⠀⠀⠀⠀⠀⢨⠀⠀⠀⢸⠃⠈⡇⡇⠀⠀⠀⢱⢸⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣿⠀⠈⢢⡀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠍⠀⠀⠀⣿⠀⠀⢡⠱⠀⠀⠀⠸⡜⡇⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⣽⢆⠀⠀⠀⠀⠀⣠⠒⠁⠉⢀⡆⠀⠀⣿⡄⠀⠸⡄⠀⠀⠀⠀⢇⠇⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢸⡄⠀⠀⣿⠀⠓⠤⠔⠒⠻⡇⢀⡴⠚⠉⡇⠀⠀⡧⢇⠀⠀⢱⡀⠀⠀⠀⠘⣾⡀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢸⡆⠀⢰⣿⡄⡆⠀⠀⠀⠀⢷⠋⠀⠀⠀⡇⠀⢀⠁⢈⠷⢶⣤⡷⣤⣤⢤⡤⠞⠓⠒⠦⢄⡀⠀
+⠀⠀⠀⠀⠀⠀⢸⠀⠀⢸⡇⡇⢁⠀⠀⠀⢀⢻⠀⠀⠀⠀⡇⠀⢸⠀⠣⢤⣀⣞⡏⠉⡱⠋⠀⠀⠀⠀⠀⠀⠙⡆
+⠀⠀⠀⠀⠀⠀⢸⠀⠀⡞⠀⢡⢸⡀⠀⣀⡼⠀⢳⠀⠀⠀⡇⠀⡏⠀⢀⣾⣿⣾⣟⡜⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻
+⠀⠀⠀⠀⠀⠀⢸⠀⢠⠇⠀⠈⢇⡷⣺⢿⠏⡞⠑⠚⠉⢀⠀⢠⠁⣠⣿⣿⣻⣟⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿
+⠀⠀⠀⠀⠀⠀⣿⠀⡘⢀⣠⠞⣉⠵⣡⠏⠀⢧⠀⠀⠀⣸⠀⣾⣼⣉⣉⣍⡿⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸
+⠀⠀⠀⠀⢀⣴⡿⢠⠏⣉⣵⠞⠁⡰⡃⠀⠀⢘⡤⠴⢒⠇⢠⣿⡀⣉⣴⣿⣿⡁⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹
+⠀⠀⠀⢀⠎⢸⡇⣸⣾⣿⣿⣀⣴⢱⣇⡤⠚⠁⢀⠀⣼⠄⡿⠋⠉⠁⢸⡛⢿⠑⢤⡌⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸
+⠀⠀⠀⡞⢀⣎⢧⣟⣿⡿⠋⠀⠀⠉⠁⠀⣠⣾⠟⣸⡟⢸⠁⠀⠀⠀⠸⡇⢸⡄⢸⠃⠀⢀⣠⠤⠤⠤⠔⠢⡀⣸
+⠀⠀⣸⠀⡸⢸⡟⣶⡿⠁⠀⠀⠀⠀⠀⠀⠉⠀⢠⣿⠀⡞⠀⠀⠀⠀⡇⣿⠸⣿⣾⠀⠀⠀⠙⠒⠒⠲⣌⣠⢌⣻
+⠀⠀⡏⠀⣇⠞⠁⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢿⢻⠀⡇⠀⠀⠀⠀⣷⡇⠀⢻⢹⡄⠀⠀⠀⠀⠀⠀⠈⠁⠀⣼
+⠀⢰⢀⡜⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⢸⣞⡄⡇⠀⠀⠀⠀⡿⡇⠀⠸⡆⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⡟
+⠀⡞⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣄⠀⢸⢸⠛⠙⠻⠀⠀⠀⠀⢣⡇⠀⠀⡇⢡⠀⠀⠀⠀⠀⡀⠀⠀⠀⡇
+⠀⢳⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⡿⠀⠀⡞⡀⠀⠀⠀⠀⠀⠀⠘⡾⡄⠀⡇⢸⠀⠀⠀⠀⡼⠁⠀⠀⢠⠃
+⢸⢸⠀⣾⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣇⠀⠀⠀⠀⠀⠀⠀⠘⣿⣆⡇⡆⠀⠀⣀⡜⠁⠀⠀⠀⢸⡆
+</div>
 </body>
 </html>
